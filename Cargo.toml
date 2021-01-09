@@ -1,0 +1,11 @@
+[package]
+name = "mre_naersk"
+version = "0.1.0"
+authors = ["Yusuf Bera Ertan <y.bera003.06@protonmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rand_core = "0.6.1"
+rand = { git = "https://github.com/rust-random/rand.git", rev = "bda997404d9ab8a89d590734d8b0bb72aed10758", package = "rand_core" }
