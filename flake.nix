@@ -3,7 +3,7 @@
 
   inputs = rec {
     naersk = {
-      url = "github:yusdacra/naersk/extract-rev-cargolock";
+      url = "github:nmattia/naersk";
       inputs.nixpkgs = nixpkgs;
     };
     flakeUtils.url = "github:numtide/flake-utils";

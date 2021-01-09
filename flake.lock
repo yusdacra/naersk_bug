@@ -20,16 +20,15 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1610184163,
-        "narHash": "sha256-Uj/x2NchvcU9UEGSd/rm6PT+Tar2t+qEZiFODmcBuWA=",
-        "owner": "yusdacra",
+        "lastModified": 1606830243,
+        "narHash": "sha256-XuHaoQNTZ+aUvM6GjsGr8bax51Vvif+kuq4il6d4ZSU=",
+        "owner": "nmattia",
         "repo": "naersk",
-        "rev": "7f85c3639803bb0cb834b59ebba1de8d6deeaa14",
+        "rev": "a76924cbbb17c387e5ae4998a4721d88a3ac95c0",
         "type": "github"
       },
       "original": {
-        "owner": "yusdacra",
-        "ref": "extract-rev-cargolock",
+        "owner": "nmattia",
         "repo": "naersk",
         "type": "github"
       }
