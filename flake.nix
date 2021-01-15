@@ -1,39 +1,30 @@
 {
   description = "Flake for mre_naersk";
 
-  inputs = rec {
-    naersk = {
-      url = "github:nmattia/naersk";
-      inputs.nixpkgs = nixpkgs;
-    };
+  inputs = {
+    naerskSrc.url = "github:nmattia/naersk";
     flakeUtils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgsMoz = {
-      url = "github:mozilla/nixpkgs-mozilla";
-      flake = false;
-    };
   };
 
   outputs = inputs: with inputs;
     with flakeUtils.lib;
-    eachSystem defaultSystems (system:
+    eachSystem [ "x86_64-linux" ] (system:
       let
-        common = import ./nix/common.nix {
-          sources = { inherit naersk nixpkgs nixpkgsMoz; };
-          inherit system;
+        pkgs = import nixpkgs { inherit system; };
+        naersk = pkgs.callPackage naerskSrc { };
+        packages = {
+          mre_naersk = naersk.buildPackage {
+            root = ./.;
+          };
         };
       in
-      rec {
-        packages = {
-          "mre_naersk" = import ./nix/build.nix { inherit common; };
-          "mre_naersk-debug" = import ./nix/build.nix { inherit common; release = false; };
+      {
+        inherit packages;
+        defaultPackage = packages.mre_naersk;
+        devShell = with pkgs; mkShell {
+          nativeBuildInputs = [ rustc cargo ];
         };
-        defaultPackage = packages."mre_naersk";
-
-        apps = builtins.mapAttrs (n: v: mkApp { name = n; drv = v; exePath = "/bin/mre_naersk"; }) packages;
-        defaultApp = apps."mre_naersk";
-
-        devShell = import ./nix/devShell.nix { inherit common; };
       }
     );
 }
