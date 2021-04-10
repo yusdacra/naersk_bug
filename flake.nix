@@ -2,7 +2,10 @@
   description = "Flake for mre_naersk";
 
   inputs = {
-    naerskSrc.url = "github:nmattia/naersk";
+    naerskSrc = {
+      url = "github:nmattia/naersk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flakeUtils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   };
