@@ -19,6 +19,14 @@
         packages = {
           mre_naersk = naersk.buildPackage {
             root = ./.;
+            override = _: {
+              PROTOC = "${pkgs.protobuf}/bin/protoc";
+              PROTOC_INCLUDE = "${pkgs.protobuf}/include";
+            };
+            overrideMain = _: {
+              PROTOC = "${pkgs.protobuf}/bin/protoc";
+              PROTOC_INCLUDE = "${pkgs.protobuf}/include";
+            };
           };
         };
       in
@@ -26,7 +34,11 @@
         inherit packages;
         defaultPackage = packages.mre_naersk;
         devShell = with pkgs; mkShell {
-          nativeBuildInputs = [ rustc cargo ];
+          nativeBuildInputs = [ rustc cargo protobuf ];
+          shellHook = ''
+            export PROTOC="${protobuf}/bin/protoc";
+            export PROTOC_INCLUDE="${protobuf}/include";
+          '';
         };
       }
     );

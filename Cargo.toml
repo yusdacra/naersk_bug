@@ -7,5 +7,7 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rand_core = "0.6.1"
-rand = { git = "https://github.com/rust-random/rand.git", rev = "bda997404d9ab8a89d590734d8b0bb72aed10758", package = "rand_core" }
+prost = "0.7"
+
+[build-dependencies]
+prost-build = "0.7"
